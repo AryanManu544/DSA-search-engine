@@ -1,0 +1,15 @@
+{
+  "name": "dsa-search-engine-api",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/api/server.js",
+  "scripts": {
+    "build:native": "bash ./compile.sh",
+    "start": "node src/api/server.js",
+    "dev": "node src/api/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

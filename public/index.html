@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="bg-orb bg-orb-one"></div>
+    <div class="bg-orb bg-orb-two"></div>
+    <div class="bg-grid"></div>
+    <div class="page-shell">
+      <main class="app">
+        <section id="home-view" class="view view-home">
+          <div class="hero">
+            <p class="hero-kicker">Document Intelligence Studio</p>
+            <div class="logo" aria-label="Search Engine logo">
+              <span class="logo-s">S</span>
+              <span class="logo-e">e</span>
+              <span class="logo-a">a</span>
+              <span class="logo-r">r</span>
+              <span class="logo-c">c</span>
+              <span class="logo-h">h</span>
+              <span class="logo-i">i</span>
+              <span class="logo-q">Q</span>
+            </div>
+            <p class="tagline">A clean search surface for your C++ engine, now wrapped with autocomplete, live results, and developer-friendly stats.</p>
+
+            <form id="home-form" class="search-stack" autocomplete="off">
+              <div class="search-box search-box-home">
+                <span class="search-icon" aria-hidden="true">⌕</span>
+                <input
+                  id="home-search-input"
+                  class="search-input"
+                  type="text"
+                  name="q"
+                  placeholder="Search your documents"
+                  aria-label="Search"
+                />
+                <button id="home-search-button" class="search-button" type="submit">
+                  Search
+                </button>
+              </div>
+              <div id="home-autocomplete" class="autocomplete hidden" role="listbox"></div>
+            </form>
+
+            <div class="hero-highlights">
+              <span class="highlight-chip">TF-IDF ranking</span>
+              <span class="highlight-chip">Autocomplete</span>
+              <span class="highlight-chip">Realtime API wrapper</span>
+            </div>
+
+            <div class="home-meta">
+              <div id="home-stats" class="pill hidden"></div>
+              <button id="home-dictionary-button" class="ghost-button" type="button">
+                Dictionary
+              </button>
+              <button id="home-dashboard-button" class="ghost-button" type="button">
+                Developer Dashboard
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section id="results-view" class="view view-results hidden">
+          <header class="results-header">
+            <div class="results-brand-row">
+              <button id="brand-home-button" class="brand-mark" type="button" aria-label="Go to homepage">
+                Search<span>iQ</span>
+              </button>
+              <form id="results-form" class="results-search-wrap" autocomplete="off">
+                <div class="search-box search-box-results">
+                  <span class="search-icon" aria-hidden="true">⌕</span>
+                  <input
+                    id="results-search-input"
+                    class="search-input"
+                    type="text"
+                    name="q"
+                    placeholder="Search your documents"
+                    aria-label="Search results query"
+                  />
+                  <button id="results-search-button" class="search-button" type="submit">
+                    Search
+                  </button>
+                </div>
+                <div id="results-autocomplete" class="autocomplete hidden" role="listbox"></div>
+              </form>
+            </div>
+            <div class="results-meta">
+              <p id="results-summary" class="results-summary"></p>
+              <button id="results-dictionary-button" class="text-button" type="button">
+                Dictionary
+              </button>
+              <button id="results-dashboard-button" class="text-button" type="button">
+                View stats
+              </button>
+            </div>
+          </header>
+
+          <section class="results-content">
+            <div id="loading-state" class="state-card hidden">Loading...</div>
+            <div id="empty-state" class="state-card hidden">No results found</div>
+            <div id="error-state" class="state-card hidden"></div>
+            <div id="results-list" class="results-list"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <div id="stats-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="stats-modal-title">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <p class="modal-eyebrow">Developer Dashboard</p>
+            <h2 id="stats-modal-title" class="modal-title">Index and Search Stats</h2>
+          </div>
+          <button id="stats-modal-close" class="modal-close" type="button" aria-label="Close stats modal">
+            ×
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="stats-modal-error" class="state-card hidden"></div>
+          <div class="stats-grid">
+            <article class="stat-tile">
+              <p class="stat-label">Total documents</p>
+              <p id="stats-total-documents" class="stat-value">--</p>
+            </article>
+            <article class="stat-tile">
+              <p class="stat-label">Total terms</p>
+              <p id="stats-total-terms" class="stat-value">--</p>
+            </article>
+            <article class="stat-tile">
+              <p class="stat-label">Total postings</p>
+              <p id="stats-total-postings" class="stat-value">--</p>
+            </article>
+            <article class="stat-tile">
+              <p class="stat-label">Last search time</p>
+              <p id="stats-search-time" class="stat-value">--</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="dictionary-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="dictionary-modal-title">
+      <div class="modal-card modal-card-wide">
+        <div class="modal-header">
+          <div>
+            <p class="modal-eyebrow">Dictionary Browser</p>
+            <h2 id="dictionary-modal-title" class="modal-title">Indexed Terms</h2>
+            <p class="dictionary-subtitle">Browse your indexed vocabulary in a focused, searchable view.</p>
+          </div>
+          <button id="dictionary-modal-close" class="modal-close" type="button" aria-label="Close dictionary modal">
+            ×
+          </button>
+        </div>
+        <div class="modal-body modal-body-dictionary">
+          <div class="dictionary-toolbar">
+            <div class="dictionary-search-shell">
+              <span class="dictionary-search-icon" aria-hidden="true">⌕</span>
+              <input
+                id="dictionary-search-input"
+                class="dictionary-search-input"
+                type="text"
+                placeholder="Search indexed words by prefix"
+                aria-label="Search indexed dictionary terms"
+              />
+            </div>
+          </div>
+
+          <div class="dictionary-info-bar">
+            <div>
+              <p class="dictionary-info-label">Overview</p>
+              <p id="dictionary-meta" class="dictionary-meta hidden"></p>
+            </div>
+            <div>
+              <p class="dictionary-info-label">Position</p>
+              <p id="dictionary-page-info" class="dictionary-page-info"></p>
+            </div>
+          </div>
+
+          <div id="dictionary-loading" class="state-card hidden">Loading...</div>
+          <div id="dictionary-error" class="state-card hidden"></div>
+
+          <section class="dictionary-surface">
+            <div id="dictionary-results" class="dictionary-results"></div>
+          </section>
+
+          <div id="dictionary-pagination" class="dictionary-pagination hidden">
+            <button id="dictionary-prev" class="ghost-button" type="button">Previous</button>
+            <button id="dictionary-next" class="ghost-button" type="button">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

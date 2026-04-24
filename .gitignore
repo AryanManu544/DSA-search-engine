@@ -1,0 +1,5 @@
+node_modules/
+20news-18828/
+search_engine
+*.o
+.DS_Store

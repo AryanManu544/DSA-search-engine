@@ -7,7 +7,6 @@ DATASET_DIR="20news-18828"
 DATASET_URL="http://qwone.com/~jason/20Newsgroups/20news-18828.tar.gz"
 DATASET_FILE="20news-18828.tar.gz"
 
-# 1. Check if directory already exists
 if [ -d "$DATASET_DIR" ]; then
     echo "Dataset directory '$DATASET_DIR' already exists."
     read -p "Do you want to download again? (y/n): " response
@@ -19,7 +18,6 @@ if [ -d "$DATASET_DIR" ]; then
     rm -rf "$DATASET_DIR"
 fi
 
-# 2. Check if archive exists before downloading
 if [ -f "$DATASET_FILE" ]; then
     echo "Archive '$DATASET_FILE' found. Extracting..."
     tar -xzf "$DATASET_FILE"
